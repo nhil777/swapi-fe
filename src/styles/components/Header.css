@@ -1,0 +1,15 @@
+.header {
+    background-color: theme('colors.white');
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+    padding: 14px;
+    box-shadow: 0 2px 0 0 theme('colors.gainsboro');
+    text-align: center;
+}
+
+.title {
+    color: theme('colors.greenTeal');
+    font-size: 18px;
+    font-weight: bold;
+}

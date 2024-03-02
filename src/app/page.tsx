@@ -1,3 +1,11 @@
+import Header from '#/components/Header';
+
 export default function Page() {
-  return <div>Page</div>;
+  return (
+    <main>
+      <Header />
+
+      <p>Page</p>
+    </main>
+  );
 }
