@@ -6,13 +6,13 @@ import Input from './Input';
 import RadioInput from './RadioInput';
 
 type Props = {
-  onResult: (results: any) => void;
+  onSearch: (results: any) => void;
   isLoading: boolean;
   onLoadingChange: (isLoading: boolean) => void;
 };
 
 export default function SearchForm({
-  onResult,
+  onSearch,
   isLoading,
   onLoadingChange,
 }: Props) {
@@ -33,7 +33,7 @@ export default function SearchForm({
     onLoadingChange(true);
 
     setTimeout(() => {
-      onResult([
+      onSearch([
         { id: 1, name: 'Biggs Darklighter', type: 'people' },
         { id: 2, name: 'Obi-Wan Kenobi', type: 'people' },
         { id: 3, name: 'Jar Jar Binks', type: 'people' },
@@ -45,45 +45,43 @@ export default function SearchForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <p className="mb-[30px] font-semibold">What are you searching for?</p>
+      <p className="font-semibold">What are you searching for?</p>
 
-        <div className="flex">
-          <RadioInput
-            disabled={isLoading}
-            name="search-type"
-            label="People"
-            value="people"
-            checked={searchType === 'people'}
-            onChange={handleSearchTypeChange}
-          />
-          <RadioInput
-            disabled={isLoading}
-            name="search-type"
-            label="Movies"
-            value="movies"
-            checked={searchType === 'movies'}
-            onChange={handleSearchTypeChange}
-          />
-        </div>
-
-        <Input
+      <div className="mt-[30px] flex">
+        <RadioInput
           disabled={isLoading}
-          name="search-query"
-          placeholder="e.g. Chewbacca, Yoda, Boba Fett"
-          autoFocus={true}
-          value={searchQuery}
-          onChange={handleSearchQueryChange}
+          name="search-type"
+          label="People"
+          value="people"
+          checked={searchType === 'people'}
+          onChange={handleSearchTypeChange}
         />
-
-        <Button
-          customClass="mt-[30px]"
-          type="submit"
-          disabled={searchQuery.length === 0}
-        >
-          {isLoading ? 'Searching...' : 'Search'}
-        </Button>
+        <RadioInput
+          disabled={isLoading}
+          name="search-type"
+          label="Movies"
+          value="movies"
+          checked={searchType === 'movies'}
+          onChange={handleSearchTypeChange}
+        />
       </div>
+
+      <Input
+        disabled={isLoading}
+        name="search-query"
+        placeholder="e.g. Chewbacca, Yoda, Boba Fett"
+        autoFocus={true}
+        value={searchQuery}
+        onChange={handleSearchQueryChange}
+      />
+
+      <Button
+        customClass="mt-[30px]"
+        type="submit"
+        disabled={searchQuery.length === 0}
+      >
+        {isLoading ? 'Searching...' : 'Search'}
+      </Button>
     </form>
   );
 }

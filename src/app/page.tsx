@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Button from '#/components/Button';
 import Card from '#/components/Card';
-import CardContent from '#/components/CardContent';
 import CardContentCentered from '#/components/CardContentCentered';
 import CardDivider from '#/components/CardDivider';
 import CardTitle from '#/components/CardTitle';
@@ -12,18 +11,12 @@ import Header from '#/components/Header';
 import SearchForm from '#/components/SearchForm';
 
 export default function Page() {
-  const [searchResults, setSearchQueryResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onResult = (results) => {
-    setSearchQueryResults(results);
-
-    console.log('results', results);
-  };
-
-  const resultsRender = () => {
+  const renderSearchResults = () => {
     return searchResults.map((result) => (
-      <div key={result.id}>
+      <li key={result.id}>
         <div className="my-[17px] flex items-center justify-between">
           <h2 className="font-bold">{result.name}</h2>
           <div className="w-[134px]">
@@ -32,9 +25,8 @@ export default function Page() {
             </Button>
           </div>
         </div>
-
         <CardDivider />
-      </div>
+      </li>
     ));
   };
 
@@ -44,29 +36,25 @@ export default function Page() {
 
       <Container>
         <Card customClass="h-[272px]">
-          <CardContent>
-            <SearchForm
-              isLoading={isLoading}
-              onLoadingChange={setIsLoading}
-              onResult={onResult}
-            />
-          </CardContent>
+          <SearchForm
+            isLoading={isLoading}
+            onLoadingChange={setIsLoading}
+            onSearch={setSearchResults}
+          />
         </Card>
         <Card customClass="md:w-[582px] md:h-[582px]">
           <CardTitle title="Results" />
 
-          <CardContent>
-            {isLoading ? (
-              <CardContentCentered>Searching...</CardContentCentered>
-            ) : searchResults.length === 0 ? (
-              <CardContentCentered>
-                There are zero matches. Use the form to search for People or
-                Movies.
-              </CardContentCentered>
-            ) : (
-              resultsRender()
-            )}
-          </CardContent>
+          {isLoading ? (
+            <CardContentCentered>Searching...</CardContentCentered>
+          ) : searchResults.length === 0 ? (
+            <CardContentCentered>
+              There are zero matches. Use the form to search for People or
+              Movies.
+            </CardContentCentered>
+          ) : (
+            <ul>{renderSearchResults()}</ul>
+          )}
         </Card>
       </Container>
     </>
