@@ -3,6 +3,7 @@ type Props = {
   disabled?: boolean;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   customClass?: string;
+  onClick: any;
 };
 
 export default function Button({
@@ -10,12 +11,14 @@ export default function Button({
   disabled = false,
   type = 'button',
   customClass = '',
+  onClick,
 }: Props) {
   return (
     <button
       className={`hover:bg-emerald h-[34px] w-full cursor-pointer rounded-full bg-greenTeal text-base font-bold uppercase text-white outline-none disabled:cursor-not-allowed disabled:bg-gray ${customClass}`}
       disabled={disabled}
       type={type}
+      onClick={onClick}
     >
       {children}
     </button>

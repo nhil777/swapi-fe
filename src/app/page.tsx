@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '#/components/Button';
 import Card from '#/components/Card';
@@ -11,6 +12,7 @@ import Header from '#/components/Header';
 import SearchForm from '#/components/SearchForm';
 
 export default function Page() {
+  const router = useRouter();
   const [searchResults, setSearchResults] = useState({
     type: 'people',
     results: [],
@@ -21,13 +23,17 @@ export default function Page() {
     const { type, results } = searchResults;
 
     return results.map((result) => (
-      <li key={result.url}>
+      <li key={result.id}>
         <div className="my-[17px] flex items-center justify-between">
           <h2 className="font-bold">
             {type === 'people' ? result.name : result.title}
           </h2>
           <div className="w-[134px]">
-            <Button customClass="m-0" type="button">
+            <Button
+              onClick={() => router.push(`/details/${type}/${result.id}`)}
+              customClass="m-0"
+              type="button"
+            >
               See Details
             </Button>
           </div>
@@ -51,6 +57,8 @@ export default function Page() {
         </Card>
         <Card customClass="md:w-[582px] md:h-[582px]">
           <CardTitle title="Results" />
+
+          <CardDivider />
 
           {isLoading ? (
             <CardContentCentered>Searching...</CardContentCentered>
