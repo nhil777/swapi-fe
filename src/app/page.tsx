@@ -5,7 +5,7 @@ import SearchForm from '#/components/SearchForm';
 
 export default function Page() {
   return (
-    <main>
+    <>
       <Header />
 
       <Container>
@@ -14,6 +14,6 @@ export default function Page() {
         </Card>
         <Card>right card</Card>
       </Container>
-    </main>
+    </>
   );
 }

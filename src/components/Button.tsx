@@ -11,7 +11,7 @@ export default function Button({
 }: Props) {
   return (
     <button
-      className="bg-greenTeal disabled:bg-gray mt-[30px] h-[34px] w-[350px] cursor-pointer rounded-full text-base font-bold uppercase text-white outline-none disabled:cursor-not-allowed"
+      className="mt-[30px] h-[34px] w-full cursor-pointer rounded-full bg-greenTeal text-base font-bold uppercase text-white outline-none disabled:cursor-not-allowed disabled:bg-gray"
       disabled={disabled}
       type={type}
     >

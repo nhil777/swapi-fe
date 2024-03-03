@@ -3,5 +3,9 @@ type Props = {
 };
 
 export default function Container({ children }: Props) {
-  return <div className="flex justify-center gap-[30px]">{children}</div>;
+  return (
+    <div className="max-w-full justify-center gap-[30px] md:flex">
+      {children}
+    </div>
+  );
 }

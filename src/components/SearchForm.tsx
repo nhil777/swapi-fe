@@ -6,7 +6,7 @@ import Input from './Input';
 import RadioInput from './RadioInput';
 
 export default function SearchForm() {
-  const [searchType, setSearchType] = useState('People');
+  const [searchType, setSearchType] = useState('people');
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ export default function SearchForm() {
           <RadioInput
             name="search-type"
             label="People"
-            value="People"
+            value="people"
             checked={searchType === 'people'}
             onChange={handleSearchTypeChange}
           />

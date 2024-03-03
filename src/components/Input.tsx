@@ -15,7 +15,7 @@ export default function Input({
 }: Props) {
   return (
     <input
-      className="border-gray mt-[30px] h-[40px] w-[350px] rounded border bg-white p-[10px] text-base shadow-inner outline-none"
+      className="mt-[30px] h-[40px] w-full rounded border border-gray bg-white p-[10px] text-base shadow-inner outline-none"
       name={name}
       placeholder={placeholder}
       autoFocus={autoFocus}
