@@ -8,10 +8,10 @@ export default function PersonDetails({ person }) {
       <CardTitle title={person.name} />
 
       <div>
-        <h4 className="mt-[30px] text-sm font-bold">Details</h4>
+        <h4 className="mt-[30px] text-base font-bold">Details</h4>
         <CardDivider />
 
-        <ul className="mt-[5px]">
+        <ul className="mt-[5px] text-sm">
           <li>Birth Year: {person.birth_year}</li>
           <li>Gender: {person.gender}</li>
           <li>Eye Color: {person.eye_color}</li>

@@ -3,9 +3,5 @@ type Props = {
 };
 
 export default function Container({ children }: Props) {
-  return (
-    <section className="max-w-full justify-center gap-[30px] md:flex">
-      {children}
-    </section>
-  );
+  return <section className="justify-center md:flex">{children}</section>;
 }

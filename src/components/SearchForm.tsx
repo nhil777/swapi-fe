@@ -56,7 +56,7 @@ export default function SearchForm({
     <form onSubmit={handleSubmit}>
       <p className="font-semibold">What are you searching for?</p>
 
-      <div className="mt-[30px] flex">
+      <div className="mt-3.5 flex">
         <RadioInput
           disabled={isLoading}
           name="search-type"
@@ -85,9 +85,10 @@ export default function SearchForm({
       />
 
       <Button
-        customClass="mt-[30px]"
+        customClass="mt-3.5"
         type="submit"
         disabled={searchQuery.length === 0}
+        onClick={(e) => handleSubmit(e)}
       >
         {isLoading ? 'Searching...' : 'Search'}
       </Button>

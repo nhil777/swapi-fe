@@ -48,7 +48,7 @@ export default function Page() {
       <Header />
 
       <Container>
-        <Card customClass="h-[272px]">
+        <Card customClass="h-fit">
           <SearchForm
             isLoading={isLoading}
             onLoadingChange={setIsLoading}
@@ -64,8 +64,9 @@ export default function Page() {
             <CardContentCentered>Searching...</CardContentCentered>
           ) : searchResults?.results?.length === 0 ? (
             <CardContentCentered>
-              There are zero matches. Use the form to search for People or
-              Movies.
+              There are zero matches.
+              <br />
+              Use the form to search for People or Movies.
             </CardContentCentered>
           ) : (
             <ul>{renderSearchResults()}</ul>

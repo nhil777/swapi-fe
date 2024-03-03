@@ -18,7 +18,7 @@ export default function Input({
   return (
     <input
       disabled={disabled}
-      className="mt-[30px] h-[40px] w-full rounded border border-gray bg-white p-[10px] text-base shadow-inner outline-none"
+      className="mt-3.5 h-[40px] w-full rounded border border-gray bg-white p-[10px] text-base shadow-inner outline-none"
       name={name}
       placeholder={placeholder}
       autoFocus={autoFocus}

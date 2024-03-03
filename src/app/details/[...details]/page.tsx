@@ -52,13 +52,11 @@ export default function Page() {
                 <MovieDetails movie={detailsResult} />
               )}
 
-              <Button
-                onClick={() => router.push('/')}
-                customClass="w-[200px] mt-[38px]"
-                type="button"
-              >
-                Back to Search
-              </Button>
+              <div className="mt-[38px] w-[250px]">
+                <Button onClick={() => router.push('/')} type="button">
+                  Back to Search
+                </Button>
+              </div>
             </>
           )}
         </Card>
