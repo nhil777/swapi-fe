@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import axios from 'axios';
 import Button from './Button';
 import Input from './Input';
 import RadioInput from './RadioInput';
@@ -27,20 +28,28 @@ export default function SearchForm({
     setSearchQuery(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onLoadingChange(true);
+    if (!searchQuery.trim()) return; // Prevent empty search query
 
-    setTimeout(() => {
-      onSearch([
-        { id: 1, name: 'Biggs Darklighter', type: 'people' },
-        { id: 2, name: 'Obi-Wan Kenobi', type: 'people' },
-        { id: 3, name: 'Jar Jar Binks', type: 'people' },
-        { id: 4, name: 'Bib Fortuna', type: 'people' },
-      ]);
+    onLoadingChange(true);
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/search/${searchType}?query=${searchQuery}`,
+      );
+
+      onSearch({
+        type: searchType,
+        results: response.data,
+      });
+    } catch (error) {
+      console.error(error);
+
+      alert('Something went wrong. Please try again later.');
+    } finally {
       onLoadingChange(false);
-    }, 1000);
+    }
   };
 
   return (

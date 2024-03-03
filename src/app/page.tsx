@@ -11,14 +11,21 @@ import Header from '#/components/Header';
 import SearchForm from '#/components/SearchForm';
 
 export default function Page() {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({
+    type: 'people',
+    results: [],
+  });
   const [isLoading, setIsLoading] = useState(false);
 
   const renderSearchResults = () => {
-    return searchResults.map((result) => (
-      <li key={result.id}>
+    const { type, results } = searchResults;
+
+    return results.map((result) => (
+      <li key={result.url}>
         <div className="my-[17px] flex items-center justify-between">
-          <h2 className="font-bold">{result.name}</h2>
+          <h2 className="font-bold">
+            {type === 'people' ? result.name : result.title}
+          </h2>
           <div className="w-[134px]">
             <Button customClass="m-0" type="button">
               See Details
@@ -47,7 +54,7 @@ export default function Page() {
 
           {isLoading ? (
             <CardContentCentered>Searching...</CardContentCentered>
-          ) : searchResults.length === 0 ? (
+          ) : searchResults?.results?.length === 0 ? (
             <CardContentCentered>
               There are zero matches. Use the form to search for People or
               Movies.
