@@ -4,6 +4,7 @@ type Props = {
   value: string;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 };
 
 export default function RadioInput({
@@ -12,10 +13,12 @@ export default function RadioInput({
   value,
   checked,
   onChange,
+  disabled = false,
 }: Props) {
   return (
     <div className="mr-[30px] flex items-center">
       <input
+        disabled={disabled}
         type="radio"
         name={name}
         value={value}

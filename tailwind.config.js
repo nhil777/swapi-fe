@@ -12,6 +12,7 @@ module.exports = {
       greenTeal: '#0ab463',
       darkGray: 'rgba(132, 132, 132, 0.75)',
       gray: '#c4c4c4',
+      emerald: '#089954',
     },
     extend: {
       spacing: {

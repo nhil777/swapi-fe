@@ -5,7 +5,17 @@ import Button from './Button';
 import Input from './Input';
 import RadioInput from './RadioInput';
 
-export default function SearchForm() {
+type Props = {
+  onResult: (results: any) => void;
+  isLoading: boolean;
+  onLoadingChange: (isLoading: boolean) => void;
+};
+
+export default function SearchForm({
+  onResult,
+  isLoading,
+  onLoadingChange,
+}: Props) {
   const [searchType, setSearchType] = useState('people');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -20,8 +30,17 @@ export default function SearchForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log('search type', searchType);
-    console.log('search query', searchQuery);
+    onLoadingChange(true);
+
+    setTimeout(() => {
+      onResult([
+        { id: 1, name: 'Biggs Darklighter', type: 'people' },
+        { id: 2, name: 'Obi-Wan Kenobi', type: 'people' },
+        { id: 3, name: 'Jar Jar Binks', type: 'people' },
+        { id: 4, name: 'Bib Fortuna', type: 'people' },
+      ]);
+      onLoadingChange(false);
+    }, 1000);
   };
 
   return (
@@ -31,6 +50,7 @@ export default function SearchForm() {
 
         <div className="flex">
           <RadioInput
+            disabled={isLoading}
             name="search-type"
             label="People"
             value="people"
@@ -38,6 +58,7 @@ export default function SearchForm() {
             onChange={handleSearchTypeChange}
           />
           <RadioInput
+            disabled={isLoading}
             name="search-type"
             label="Movies"
             value="movies"
@@ -47,6 +68,7 @@ export default function SearchForm() {
         </div>
 
         <Input
+          disabled={isLoading}
           name="search-query"
           placeholder="e.g. Chewbacca, Yoda, Boba Fett"
           autoFocus={true}
@@ -54,7 +76,13 @@ export default function SearchForm() {
           onChange={handleSearchQueryChange}
         />
 
-        <Button type="submit">Search</Button>
+        <Button
+          customClass="mt-[30px]"
+          type="submit"
+          disabled={searchQuery.length === 0}
+        >
+          {isLoading ? 'Searching...' : 'Search'}
+        </Button>
       </div>
     </form>
   );
