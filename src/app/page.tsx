@@ -10,10 +10,11 @@ import CardTitle from '#/components/CardTitle';
 import Container from '#/components/Container';
 import Header from '#/components/Header';
 import SearchForm from '#/components/SearchForm';
+import type { Movie, Person, SearchResults } from '#/lib/types';
 
 export default function Page() {
   const router = useRouter();
-  const [searchResults, setSearchResults] = useState({
+  const [searchResults, setSearchResults] = useState<SearchResults>({
     type: 'people',
     results: [],
   });
@@ -22,11 +23,13 @@ export default function Page() {
   const renderSearchResults = () => {
     const { type, results } = searchResults;
 
-    return results.map((result) => (
+    return results.map((result: Movie | Person) => (
       <li key={result.id}>
         <div className="my-[17px] flex items-center justify-between">
           <h2 className="font-bold">
-            {type === 'people' ? result.name : result.title}
+            {type === 'people'
+              ? (result as Person).name
+              : (result as Movie).title}
           </h2>
           <div className="w-[134px]">
             <Button

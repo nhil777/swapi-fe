@@ -1,13 +1,13 @@
-'use client';
-
 import { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
+import type { SearchResults, SearchType } from '#/lib/types';
 import Button from './Button';
 import Input from './Input';
 import RadioInput from './RadioInput';
 
 type Props = {
-  onSearch: (results: any) => void;
+  onSearch: (results: SearchResults) => void;
   isLoading: boolean;
   onLoadingChange: (isLoading: boolean) => void;
 };
@@ -17,18 +17,18 @@ export default function SearchForm({
   isLoading,
   onLoadingChange,
 }: Props) {
-  const [searchType, setSearchType] = useState('people');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchType, setSearchType] = useState<SearchType>('people');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const handleSearchTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchType(e.target.value);
+  const handleSearchTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchType(e.target.value as SearchType);
   };
 
-  const handleSearchQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!searchQuery.trim()) return; // Prevent empty search query
@@ -88,7 +88,7 @@ export default function SearchForm({
         customClass="mt-3.5"
         type="submit"
         disabled={searchQuery.length === 0}
-        onClick={(e) => handleSubmit(e)}
+        onClick={handleSubmit}
       >
         {isLoading ? 'Searching...' : 'Search'}
       </Button>

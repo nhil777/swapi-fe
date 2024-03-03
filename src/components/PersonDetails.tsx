@@ -1,8 +1,13 @@
 import React from 'react';
+import type { Person } from '#/lib/types';
 import CardDivider from './CardDivider';
 import CardTitle from './CardTitle';
 
-export default function PersonDetails({ person }) {
+type Props = {
+  person: Person;
+};
+
+export default function PersonDetails({ person }: Props) {
   return (
     <>
       <CardTitle title={person.name} />

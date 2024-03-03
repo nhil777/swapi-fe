@@ -1,5 +1,5 @@
 type Props = {
-  children: any;
+  children: React.ReactNode;
   disabled?: boolean;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   customClass?: string;

@@ -10,18 +10,21 @@ import Container from '#/components/Container';
 import Header from '#/components/Header';
 import MovieDetails from '#/components/MovieDetails';
 import PersonDetails from '#/components/PersonDetails';
+import type { DetailsResult } from '#/lib/types';
 
 export default function Page() {
   const router = useRouter();
   const { details } = useParams();
-  const [detailsResult, setDetailsResult] = useState({});
+  const [detailsResult, setDetailsResult] = useState<DetailsResult>({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const [type, resourceId] = details;
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/details/${details[0]}/${details[1]}`,
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/details/${type}/${resourceId}`,
         );
 
         setDetailsResult(response.data);
@@ -46,7 +49,7 @@ export default function Page() {
             <CardContentCentered>Loading...</CardContentCentered>
           ) : (
             <>
-              {details[0] === 'people' ? (
+              {type === 'people' ? (
                 <PersonDetails person={detailsResult} />
               ) : (
                 <MovieDetails movie={detailsResult} />
