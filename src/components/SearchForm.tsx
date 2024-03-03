@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import type { SearchResults, SearchType } from '#/lib/types';
@@ -28,10 +28,22 @@ export default function SearchForm({
     setSearchQuery(e.target.value);
   };
 
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      search();
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!searchQuery.trim()) return; // Prevent empty search query
+    search();
+  };
+
+  const search = async () => {
+    if (!searchQuery.trim() || searchQuery.length <= 1) return; // Prevent empty search query
 
     onLoadingChange(true);
     try {
@@ -76,7 +88,6 @@ export default function SearchForm({
       </div>
 
       <Input
-        disabled={isLoading}
         name="search-query"
         placeholder="e.g. Chewbacca, Yoda, Boba Fett"
         autoFocus={true}
@@ -87,7 +98,7 @@ export default function SearchForm({
       <Button
         customClass="mt-3.5"
         type="submit"
-        disabled={searchQuery.length === 0}
+        disabled={searchQuery.length <= 1}
         onClick={handleSubmit}
       >
         {isLoading ? 'Searching...' : 'Search'}
