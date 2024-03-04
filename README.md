@@ -6,12 +6,14 @@ The frontend is developed using Next.js and TypeScript and utilizes Playwright f
 
 ## Initial Setup
 
-1. Create a Docker network:
+1. Copy `.env.example` to a new file `.env`
+
+2. Create a Docker network:
     ```bash
     docker network create kool_global
     ```
 
-2. Launch the application:
+3. Launch the application:
     ```bash
     docker-compose up
     ```
