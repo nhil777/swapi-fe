@@ -1,8 +1,9 @@
-version: "3.7"
+version: "3.3"
 services:
   app:
     image: kooldev/node:20
-    command: ["npm", "run", "dev"]
+    command: >
+      bash -c "if [ ! -d /app/node_modules ]; then npm install; fi && npm run dev"
     ports:
       - "${KOOL_APP_PORT:-3000}:3000"
     environment:
@@ -18,4 +19,3 @@ networks:
   kool_local:
   kool_global:
     external: true
-    name: "${KOOL_GLOBAL_NETWORK:-kool_global}"
