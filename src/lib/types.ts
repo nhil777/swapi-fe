@@ -20,8 +20,6 @@ export interface SearchResults {
   results: (Movie | Person)[];
 }
 
-export interface DetailsResult {
-  [key: string]: Movie | Person;
-}
+export type DetailsResult = Movie | Person;
 
 export type SearchType = 'people' | 'movies';

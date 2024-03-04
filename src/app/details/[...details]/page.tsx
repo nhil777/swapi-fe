@@ -10,15 +10,15 @@ import Container from '#/components/Container';
 import Header from '#/components/Header';
 import MovieDetails from '#/components/MovieDetails';
 import PersonDetails from '#/components/PersonDetails';
-import type { DetailsResult } from '#/lib/types';
+import type { DetailsResult, Movie, Person } from '#/lib/types';
 
 export default function Page() {
   const router = useRouter();
   const { details } = useParams();
-  const [detailsResult, setDetailsResult] = useState<DetailsResult>({});
+  const [detailsResult, setDetailsResult] = useState<DetailsResult>();
   const [isLoading, setIsLoading] = useState(true);
 
-  const [type, resourceId] = details;
+  const [type, resourceId] = Array.isArray(details) ? details : [details];
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -38,7 +38,7 @@ export default function Page() {
     };
 
     fetchDetails();
-  }, []);
+  }, [resourceId, type]);
 
   return (
     <>
@@ -50,9 +50,9 @@ export default function Page() {
           ) : (
             <>
               {type === 'people' ? (
-                <PersonDetails person={detailsResult} />
+                <PersonDetails person={detailsResult as Person} />
               ) : (
-                <MovieDetails movie={detailsResult} />
+                <MovieDetails movie={detailsResult as Movie} />
               )}
 
               <div className="mt-[38px] w-[250px]">

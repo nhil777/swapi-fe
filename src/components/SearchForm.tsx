@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import type { SearchResults, SearchType } from '#/lib/types';
@@ -28,21 +28,7 @@ export default function SearchForm({
     setSearchQuery(e.target.value);
   };
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      search();
-    }, 500);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchQuery]);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    search();
-  };
-
-  const search = async () => {
+  const search = useCallback(async () => {
     if (!searchQuery.trim() || searchQuery.length <= 1) return; // Prevent empty search query
 
     onLoadingChange(true);
@@ -62,6 +48,20 @@ export default function SearchForm({
     } finally {
       onLoadingChange(false);
     }
+  }, [searchQuery, searchType, onLoadingChange, onSearch]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      search();
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [search]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    search();
   };
 
   return (

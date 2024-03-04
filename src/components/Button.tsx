@@ -15,7 +15,7 @@ export default function Button({
 }: Props) {
   return (
     <button
-      className={`hover:bg-emerald h-[34px] w-full cursor-pointer rounded-full bg-greenTeal text-sm font-bold uppercase text-white outline-none disabled:cursor-not-allowed disabled:bg-gray ${customClass}`}
+      className={`h-[34px] w-full cursor-pointer rounded-full bg-greenTeal text-sm font-bold uppercase text-white outline-none hover:bg-emerald disabled:cursor-not-allowed disabled:bg-gray ${customClass}`}
       disabled={disabled}
       type={type}
       onClick={onClick}
