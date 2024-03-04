@@ -66,7 +66,9 @@ export default function SearchForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      <p className="font-semibold">What are you searching for?</p>
+      <p className="font-semibold" test-id="form-title">
+        What are you searching for?
+      </p>
 
       <div className="mt-3.5 flex">
         <RadioInput

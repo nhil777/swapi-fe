@@ -24,9 +24,9 @@ export default function Page() {
     const { type, results } = searchResults;
 
     return results.map((result: Movie | Person) => (
-      <li key={result.id}>
+      <li test-id={`result-${result.id}`} key={result.id}>
         <div className="my-[17px] flex items-center justify-between">
-          <h2 className="font-bold">
+          <h2 className="font-bold" test-id={`resource-label-${result.id}`}>
             {type === 'people'
               ? (result as Person).name
               : (result as Movie).title}
@@ -36,6 +36,7 @@ export default function Page() {
               onClick={() => router.push(`/details/${type}/${result.id}`)}
               customClass="m-0"
               type="button"
+              testId={`see-details-${result.id}`}
             >
               See Details
             </Button>

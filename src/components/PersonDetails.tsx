@@ -10,19 +10,34 @@ type Props = {
 export default function PersonDetails({ person }: Props) {
   return (
     <>
-      <CardTitle title={person.name} />
+      <CardTitle testId="card-title" title={person.name} />
 
       <div>
         <h4 className="mt-[30px] text-base font-bold">Details</h4>
         <CardDivider />
 
         <ul className="mt-[5px] text-sm">
-          <li>Birth Year: {person.birth_year}</li>
-          <li>Gender: {person.gender}</li>
-          <li>Eye Color: {person.eye_color}</li>
-          <li>Hair Color: {person.hair_color}</li>
-          <li>Height: {person.height}</li>
-          <li>Mass: {person.mass}</li>
+          <li>
+            Birth Year:{' '}
+            <span test-id="person-birth_year">{person.birth_year}</span>
+          </li>
+          <li>
+            Gender: <span test-id="person-gender">{person.gender}</span>
+          </li>
+          <li>
+            Eye Color:{' '}
+            <span test-id="person-eye_color">{person.eye_color}</span>
+          </li>
+          <li>
+            Hair Color:{' '}
+            <span test-id="person-hair_color">{person.hair_color}</span>
+          </li>
+          <li>
+            Height: <span test-id="person-height">{person.height}</span>
+          </li>
+          <li>
+            Mass: <span test-id="person-mass">{person.mass}</span>
+          </li>
         </ul>
       </div>
     </>

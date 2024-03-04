@@ -16,13 +16,13 @@ export default function MovieDetails({ movie }: Props) {
 
   return (
     <>
-      <CardTitle title={movie.title} />
+      <CardTitle testId="card-title" title={movie.title} />
 
       <div>
         <h4 className="mt-[30px] text-sm font-bold">Opening Crawl</h4>
         <CardDivider />
 
-        <>{formattedText}</>
+        <div test-id="movie-opening_crawl">{formattedText}</div>
       </div>
     </>
   );

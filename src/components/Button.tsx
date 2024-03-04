@@ -4,6 +4,7 @@ type Props = {
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   customClass?: string;
   onClick: any;
+  testId?: string;
 };
 
 export default function Button({
@@ -12,6 +13,7 @@ export default function Button({
   type = 'button',
   customClass = '',
   onClick,
+  testId,
 }: Props) {
   return (
     <button
@@ -19,6 +21,7 @@ export default function Button({
       disabled={disabled}
       type={type}
       onClick={onClick}
+      test-id={testId}
     >
       {children}
     </button>
